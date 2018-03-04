@@ -114,6 +114,8 @@ class Dmx extends Component {
         else if ($button.className.match(/(^| )clhat( |$)/)) this.trigger(this.sounds.clHat);
         else if ($button.className.match(/(^| )ophat( |$)/)) this.trigger(this.sounds.opHat);
         else if ($button.className.match(/(^| )clap( |$)/)) this.trigger(this.sounds.clap);
+
+        $button.blur();
     }
 
     handleSwing(e) {
