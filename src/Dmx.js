@@ -56,42 +56,15 @@ class Dmx extends Component {
     render() {
         return (
             <section>
-                <article className="tempo">
-                    <input onChange={(e) => this.handleTempo(e)} value = {this.state.tempo} />
-                    <label>TEMPO</label>
-                </article>
-                <article className="toggle-pattern top-btn">
-                    <button className="active" onClick={(e) => this.togglePattern(e)}>PATTERN</button>
-                    <span>PATTERN</span>
-                </article>
-                <article className="swing top-btn">
-                    <button onClick={(e) => this.handleSwing(e)}>SWING</button>
-                    <span>SWING</span>
-                </article>
-                <article className="start-stop top-btn">
-                    <button onClick={(e) => this.handleStartStop(e)}>START/STOP</button>
-                    <span>START/STOP</span>
-                </article>
-                <article className='row one'>
-                    <span>BASS</span>
-                    {this.baseArray.map((elem, i) => <button className="kick simple-button" key={i} onClick={(e) => this.handleButtonClick(e)}>Kick</button> )}
-                </article>
-                <article className='row two'>
-                    <span>SNARE</span>
-                    {this.baseArray.map((elem, i) => <button className="snare simple-button" key={i}  onClick={(e) => this.handleButtonClick(e)}>Snare</button> )}
-                </article>
-                <article className='row three'>
-                    <span>CLAP</span>
-                    {this.baseArray.map((elem, i) => <button className="clap simple-button" key={i}  onClick={(e) => this.handleButtonClick(e)}>Clap</button> )}
-                </article>
-                <article className='row four'>
-                    <span>HI-HAT A</span>
-                    {this.baseArray.map((elem, i) => <button className="clhat  simple-button" key={i}  onClick={(e) => this.handleButtonClick(e)}>Closed Hat</button> )}
-                </article>
-                <article className='row five'>
-                    <span>HI-HAT B</span>
-                    {this.baseArray.map((elem, i) => <button className="ophat simple-button" key={i} onClick={(e) => this.handleButtonClick(e)}>Opened Hat</button> )}
-                </article>
+                <TempoUI tempo={this.state.tempo} onChange={(e) => this.handleTempo(e)}></TempoUI>
+                <PatternUI onClick={(e) => this.togglePattern(e)}></PatternUI>
+                <SwingUI onClick={(e) => this.handleSwing(e)}></SwingUI>
+                <StartStopUI onClick={(e) => this.handleStartStop(e)}></StartStopUI>
+                <BassDrum baseArray={this.baseArray} onClick={(e) => this.handleButtonClick(e)}></BassDrum>
+                <SnareDrum baseArray={this.baseArray} onClick={(e) => this.handleButtonClick(e)}></SnareDrum>
+                <Clap baseArray={this.baseArray} onClick={(e) => this.handleButtonClick(e)}></Clap>
+                <ClosedHat baseArray={this.baseArray} onClick={(e) => this.handleButtonClick(e)}></ClosedHat>
+                <OpenHat baseArray={this.baseArray} onClick={(e) => this.handleButtonClick(e)}></OpenHat>
                 <div className="glow hide"></div>
             </section>
         );
@@ -212,7 +185,7 @@ class Dmx extends Component {
                     break;
 
                 default:
-                    tempo = 100;
+                    tempo = 120;
             }
             this.setState({ tempo: tempo });
         };
@@ -261,7 +234,7 @@ class Dmx extends Component {
                     this.startButton.click();
                     break;
                 default:
-                    return false;
+                    //
             }
         });
     }
@@ -319,6 +292,105 @@ class Dmx extends Component {
                 }
             }
         }
+    }
+}
+
+class TempoUI extends Component {
+    render() {
+        return (
+            <article className="tempo">
+                <input onChange={(e) => this.props.onChange(e)} value = {this.props.tempo} />
+                <label>TEMPO</label>
+            </article>
+        );
+    }
+}
+
+class PatternUI extends Component {
+    render() {
+        return (
+            <article className="toggle-pattern top-btn">
+                <button className="active" onClick={(e) => this.props.onClick(e)}>PATTERN</button>
+                <span>PATTERN</span>
+            </article>
+        );
+    }
+}
+
+class SwingUI extends Component {
+    render() {
+        return (
+            <article className="swing top-btn">
+                <button onClick={(e) => this.props.onClick(e)}>SWING</button>
+                <span>SWING</span>
+            </article>
+        );
+    }
+}
+
+class StartStopUI extends Component {
+    render() {
+        return (
+            <article className="start-stop top-btn">
+                <button onClick={(e) => this.props.onClick(e)}>START/STOP</button>
+                <span>START/STOP</span>
+            </article>
+        );
+    }
+}
+
+class BassDrum extends Component {
+    render() {
+        return (
+            <article className='row one'>
+                <span>BASS</span>
+                {this.props.baseArray.map((elem, i) => <button className="kick simple-button" key={i} onClick={(e) => this.props.onClick(e)}>Kick</button> )}
+            </article>
+        );
+    }
+}
+
+class SnareDrum extends Component {
+    render() {
+        return (
+            <article className='row two'>
+                <span>SNARE</span>
+                {this.props.baseArray.map((elem, i) => <button className="snare simple-button" key={i}  onClick={(e) => this.props.onClick(e)}>Snare</button> )}
+            </article>
+        );
+    }
+}
+
+class Clap extends Component  {
+    render() {
+        return (
+            <article className='row three'>
+                <span>CLAP</span>
+                {this.props.baseArray.map((elem, i) => <button className="clap simple-button" key={i}  onClick={(e) => this.props.onClick(e)}>Clap</button> )}
+            </article>
+        );
+    }
+}
+
+class ClosedHat extends Component  {
+    render() {
+        return (
+            <article className='row four'>
+                <span>HI-HAT A</span>
+                {this.props.baseArray.map((elem, i) => <button className="clhat  simple-button" key={i}  onClick={(e) => this.props.onClick(e)}>Closed Hat</button> )}
+            </article>
+        );
+    }
+}
+
+class OpenHat extends Component {
+    render() {
+        return (
+            <article className='row five'>
+                <span>HI-HAT B</span>
+                {this.props.baseArray.map((elem, i) => <button className="ophat simple-button" key={i} onClick={(e) => this.props.onClick(e)}>Opened Hat</button> )}
+            </article>
+        );
     }
 }
 
