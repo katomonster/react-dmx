@@ -5,6 +5,8 @@ class Dmx extends Component {
     constructor() {
         super();
 
+        const SRC_URL = 'https://raw.githubusercontent.com/katomonster/react-dmx/master/src/';
+
         this.baseArray   = [...Array(16)];
         this.subdivision = 4;
         this.minuteToMil = 60000;
@@ -20,21 +22,21 @@ class Dmx extends Component {
         };
 
         this.sounds = {
-            'kick':     {'src': 'http://katomonster.com/dmx/assets/samples/03_BASS_01.wav',       'volume': 1   },
-            'snare':    {'src': 'http://katomonster.com/dmx/assets/samples/06_SNARE_01.wav',      'volume': 1   },
-            'clap':     {'src': 'http://katomonster.com/dmx/assets/samples/26_CLAP.wav',          'volume': 0.1 },
-            'clHat':    {'src': 'http://katomonster.com/dmx/assets/samples/09_HI-HAT_CLOSED.wav', 'volume': 0.2 },
-            'opHat':    {'src': 'http://katomonster.com/dmx/assets/samples/11_HI-HAT_OPEN.wav',   'volume': 0.07},
-            'yeah':     {'src': 'http://katomonster.com/dmx/assets/samples/awyeah.wav',           'volume': 0.4 },
-            'feel':     {'src': 'http://katomonster.com/dmx/assets/samples/canyoufeelit.wav',     'volume': 0.4 },
-            'check':    {'src': 'http://katomonster.com/dmx/assets/samples/checkthisout.wav',     'volume': 0.4 },
-            'here':     {'src': 'http://katomonster.com/dmx/assets/samples/herewego.wav',         'volume': 0.4 },
-            'oww':      {'src': 'http://katomonster.com/dmx/assets/samples/oww.wav',              'volume': 0.4 },
-            'woo':      {'src': 'http://katomonster.com/dmx/assets/samples/woo.wav',              'volume': 0.4 },
-            'hiTom':    {'src': 'http://katomonster.com/dmx/assets/samples/12_TOM_01.wav',        'volume': 0.3 },
-            'midTom':   {'src': 'http://katomonster.com/dmx/assets/samples/14_TOM_03.wav',        'volume': 0.3 },
-            'loTom':    {'src': 'http://katomonster.com/dmx/assets/samples/17_TOM_06.wav',        'volume': 0.3 },
-            'cowbell':  {'src': 'http://katomonster.com/dmx/assets/samples/808cowbell.wav',       'volume': 0.5 }
+            'kick':     {'src': SRC_URL + 'samples/03_BASS_01.wav',       'volume': 1   },
+            'snare':    {'src': SRC_URL + 'samples/06_SNARE_01.wav',      'volume': 1   },
+            'clap':     {'src': SRC_URL + 'samples/26_CLAP.wav',          'volume': 0.1 },
+            'clHat':    {'src': SRC_URL + 'samples/09_HI-HAT_CLOSED.wav', 'volume': 0.2 },
+            'opHat':    {'src': SRC_URL + 'samples/11_HI-HAT_OPEN.wav',   'volume': 0.07},
+            'yeah':     {'src': SRC_URL + 'samples/awyeah.wav',           'volume': 0.4 },
+            'feel':     {'src': SRC_URL + 'samples/canyoufeelit.wav',     'volume': 0.4 },
+            'check':    {'src': SRC_URL + 'samples/checkthisout.wav',     'volume': 0.4 },
+            'here':     {'src': SRC_URL + 'samples/herewego.wav',         'volume': 0.4 },
+            'oww':      {'src': SRC_URL + 'samples/oww.wav',              'volume': 0.4 },
+            'woo':      {'src': SRC_URL + 'samples/woo.wav',              'volume': 0.4 },
+            'hiTom':    {'src': SRC_URL + 'samples/12_TOM_01.wav',        'volume': 0.3 },
+            'midTom':   {'src': SRC_URL + 'samples/14_TOM_03.wav',        'volume': 0.3 },
+            'loTom':    {'src': SRC_URL + 'samples/17_TOM_06.wav',        'volume': 0.3 },
+            'cowbell':  {'src': SRC_URL + 'samples/808cowbell.wav',       'volume': 0.5 }
         };
 
         this.pattern = [
