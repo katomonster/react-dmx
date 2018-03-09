@@ -5,7 +5,7 @@ class Dmx extends Component {
     constructor() {
         super();
 
-        const SRC_URL = 'https://raw.githubusercontent.com/katomonster/react-dmx/master/src/';
+        const SRC_URL = '';
 
         this.baseArray   = [...Array(16)];
         this.subdivision = 4;
