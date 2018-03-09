@@ -299,103 +299,85 @@ class Dmx extends Component {
     }
 }
 
-class TempoUI extends Component {
-    render() {
-        return (
-            <article className="tempo">
-                <input onChange={(e) => this.props.onChange(e)} value = {this.props.tempo} />
-                <label>TEMPO</label>
-            </article>
-        );
-    }
+const TempoUI = (props) => {
+    return (
+        <article className="tempo">
+            <input onChange={(e) => props.onChange(e)} value = {props.tempo} />
+            <label>TEMPO</label>
+        </article>
+    );
 }
 
-class PatternUI extends Component {
-    render() {
-        return (
-            <article className="toggle-pattern top-btn">
-                <button className="active" onClick={(e) => this.props.onClick(e)}>PATTERN</button>
-                <span>PATTERN</span>
-            </article>
-        );
-    }
+const PatternUI = (props) => {
+    return (
+        <article className="toggle-pattern top-btn">
+            <button className="active" onClick={(e) => props.onClick(e)}>PATTERN</button>
+            <span>PATTERN</span>
+        </article>
+    );
 }
 
-class SwingUI extends Component {
-    render() {
-        return (
-            <article className="swing top-btn">
-                <button onClick={(e) => this.props.onClick(e)}>SWING</button>
-                <span>SWING</span>
-            </article>
-        );
-    }
+const SwingUI = (props) => {
+    return (
+        <article className="swing top-btn">
+            <button onClick={(e) => props.onClick(e)}>SWING</button>
+            <span>SWING</span>
+        </article>
+    );
 }
 
-class StartStopUI extends Component {
-    render() {
-        return (
-            <article className="start-stop top-btn">
-                <button onClick={(e) => this.props.onClick(e)}>START/STOP</button>
-                <span>START/STOP</span>
-            </article>
-        );
-    }
+const StartStopUI = (props) => {
+    return (
+        <article className="start-stop top-btn">
+            <button onClick={(e) => props.onClick(e)}>START/STOP</button>
+            <span>START/STOP</span>
+        </article>
+    );
 }
 
-class BassDrum extends Component {
-    render() {
-        return (
-            <article className='row one'>
-                <span>BASS</span>
-                {this.props.baseArray.map((elem, i) => <button className="kick simple-button" key={i} onClick={(e) => this.props.onClick(e)}>Kick</button> )}
-            </article>
-        );
-    }
+const BassDrum = (props) => {
+    return (
+        <article className='row one'>
+            <span>BASS</span>
+            {props.baseArray.map((elem, i) => <button className="kick simple-button" key={i} onClick={(e) => props.onClick(e)}>Kick</button> )}
+        </article>
+    );
 }
 
-class SnareDrum extends Component {
-    render() {
-        return (
-            <article className='row two'>
-                <span>SNARE</span>
-                {this.props.baseArray.map((elem, i) => <button className="snare simple-button" key={i}  onClick={(e) => this.props.onClick(e)}>Snare</button> )}
-            </article>
-        );
-    }
+const SnareDrum = (props) => {
+    return (
+        <article className='row two'>
+            <span>SNARE</span>
+            {props.baseArray.map((elem, i) => <button className="snare simple-button" key={i}  onClick={(e) => props.onClick(e)}>Snare</button> )}
+        </article>
+    );
 }
 
-class Clap extends Component  {
-    render() {
-        return (
-            <article className='row three'>
-                <span>CLAP</span>
-                {this.props.baseArray.map((elem, i) => <button className="clap simple-button" key={i}  onClick={(e) => this.props.onClick(e)}>Clap</button> )}
-            </article>
-        );
-    }
+const Clap = (props) => {
+    return (
+        <article className='row three'>
+            <span>CLAP</span>
+            {props.baseArray.map((elem, i) => <button className="clap simple-button" key={i}  onClick={(e) => props.onClick(e)}>Clap</button> )}
+        </article>
+    );
 }
 
-class ClosedHat extends Component  {
-    render() {
-        return (
-            <article className='row four'>
-                <span>HI-HAT A</span>
-                {this.props.baseArray.map((elem, i) => <button className="clhat  simple-button" key={i}  onClick={(e) => this.props.onClick(e)}>Closed Hat</button> )}
-            </article>
-        );
-    }
+const ClosedHat = (props) => {
+    return (
+        <article className='row four'>
+            <span>HI-HAT A</span>
+            {props.baseArray.map((elem, i) => <button className="clhat  simple-button" key={i}  onClick={(e) => props.onClick(e)}>Closed Hat</button> )}
+        </article>
+    );
 }
 
-class OpenHat extends Component {
-    render() {
-        return (
-            <article className='row five'>
-                <span>HI-HAT B</span>
-                {this.props.baseArray.map((elem, i) => <button className="ophat simple-button" key={i} onClick={(e) => this.props.onClick(e)}>Opened Hat</button> )}
-            </article>
-        );
-    }
+const OpenHat = (props) => {
+    return (
+        <article className='row five'>
+            <span>HI-HAT B</span>
+            {props.baseArray.map((elem, i) => <button className="ophat simple-button" key={i} onClick={(e) => props.onClick(e)}>Opened Hat</button> )}
+        </article>
+    );
 }
 
 
