@@ -18,7 +18,8 @@ class Dmx extends Component {
             audioSrc: "",
             interval: Math.round((this.minuteToMil / 120) / this.subdivision),
             count: 0,
-            swing: false
+            swing: false,
+            isPlaying: false
         };
 
         this.sounds = {
@@ -51,7 +52,7 @@ class Dmx extends Component {
     componentDidMount() {
         this.startButton = document.querySelector('.start-stop button');
         this.loadPattern();
-        this.handleVolInput();
+        this.handleTempoInput();
         this.bindDrumKeys();
     }
 
@@ -60,8 +61,8 @@ class Dmx extends Component {
             <section>
                 <TempoUI tempo={this.state.tempo} onChange={(e) => this.handleTempo(e)}></TempoUI>
                 <PatternUI onClick={(e) => this.togglePattern(e)}></PatternUI>
-                <SwingUI onClick={(e) => this.handleSwing(e)}></SwingUI>
-                <StartStopUI onClick={(e) => this.handleStartStop(e)}></StartStopUI>
+                <SwingUI onClick={(e) => this.handleSwing(e)} swing={this.state.swing}></SwingUI>
+                <StartStopUI onClick={this.handleStartStop.bind(this)} isPlaying={this.state.isPlaying}></StartStopUI>
                 <BassDrum baseArray={this.baseArray} onClick={(e) => this.handleButtonClick(e)}></BassDrum>
                 <SnareDrum baseArray={this.baseArray} onClick={(e) => this.handleButtonClick(e)}></SnareDrum>
                 <Clap baseArray={this.baseArray} onClick={(e) => this.handleButtonClick(e)}></Clap>
@@ -72,17 +73,14 @@ class Dmx extends Component {
         );
     }
 
-    handleStartStop(e) {
+    handleStartStop() {
         const $glow = document.querySelector('.glow');
-        const $this = this;
 
+        this.setState({isPlaying: !this.state.isPlaying});
 
-        let init = new Date().getTime();
-        this.startButton.classList.toggle('active');
-        this.handleTempo(init);
-        if (this.startButton.classList.contains('active')) {
+        if (!this.state.isPlaying) {
             $glow.classList.remove('hide');
-            loop();
+            loop(this);
         } else {
             clearTimeout(this.timer);
             this.setState({count: 0});
@@ -93,14 +91,15 @@ class Dmx extends Component {
             }
         }
 
-        function loop() {
+        function loop($this) {
             $this.timer = setTimeout(function() {
-                const init2 = new Date().getTime();
                 if ($this.state.count === $this.subdivision * 4) $this.setState({count: 0});
                 $this.playSubdiv($this.state.count);
-                $this.handleTempo(init2);
-                $this.setState({count: $this.state.count + 1});
-                loop();
+                $this.setState({
+                    count: $this.state.count + 1,
+                    interval: Math.round(($this.minuteToMil / $this.state.tempo) / $this.subdivision)
+                });
+                loop($this);
             }, $this.state.interval);
         }
     }
@@ -119,8 +118,7 @@ class Dmx extends Component {
     }
 
     handleSwing(e) {
-        console.log('set swing, ', this.state.swing);
-        e.target.classList.toggle('active');
+        e.target.blur();
         this.setState({swing: !this.state.swing});
     }
 
@@ -152,8 +150,10 @@ class Dmx extends Component {
         }
     }
 
-    handleTempo() {
-        const newTempo = document.querySelector('.tempo input').value;
+    handleTempo(e) {
+        const newTempo = e.target.value;
+
+        e.target.blur();
 
         this.setState({
             tempo: newTempo,
@@ -161,35 +161,37 @@ class Dmx extends Component {
         });
     }
 
-    handleVolInput() {
-        document.onkeydown =  (e) => {
+    handleTempoInput() {
+        document.onkeydown = (e) => {
             e = e || window.event;
 
+            e.target.blur();
+
             const $input = document.querySelector('.tempo input');
-            const volume = Number($input.value);
+            const curTempo = Number($input.value);
 
             let tempo;
 
             switch (e.keyCode) {
                 case 38: // up arrow
-                    tempo = volume + 1;
+                    tempo = curTempo + 1;
                     $input.value = tempo;
                     break;
                 case 40: // down arrow
-                    tempo = volume - 1;
+                    tempo = curTempo - 1;
                     $input.value = tempo;
                     break;
                 case 37: // left arrow
-                    tempo = volume - 1;
+                    tempo = curTempo - 1;
                     $input.value = tempo;
                     break;
                 case 39:  // right arrow
-                    tempo = volume + 1;
+                    tempo = curTempo + 1;
                     $input.value = tempo;
                     break;
 
                 default:
-                    tempo = 120;
+                    tempo = this.state.tempo;
             }
             this.setState({ tempo: tempo });
         };
@@ -262,13 +264,14 @@ class Dmx extends Component {
     }
 
     trigger(sound, count) {
-        const audio       = new Audio();
-        audio.src       = sound.src;
-        audio.volume    = sound.volume;
+        const $this  = this;
+        const audio  = new Audio();
+        audio.src    = sound.src;
+        audio.volume = sound.volume;
 
         if (this.state.swing && (this.state.count % 2 === 1)) {
             setTimeout(function () {
-                this.playSound(audio); //delayed trigger
+                $this.playSound(audio); //delayed trigger
             }, this.state.interval / (Math.random() * 3 + 2));
         } else {
             this.playSound(audio); //normal
@@ -318,9 +321,10 @@ const PatternUI = (props) => {
 }
 
 const SwingUI = (props) => {
+    const swingClass = props.swing ? 'active' : '';
     return (
         <article className="swing top-btn">
-            <button onClick={(e) => props.onClick(e)}>SWING</button>
+            <button onClick={(e) => props.onClick(e)} className={swingClass}>SWING</button>
             <span>SWING</span>
         </article>
     );
@@ -329,7 +333,7 @@ const SwingUI = (props) => {
 const StartStopUI = (props) => {
     return (
         <article className="start-stop top-btn">
-            <button onClick={(e) => props.onClick(e)}>START/STOP</button>
+            <button onClick={(e) => props.onClick(e)} className={props.isPlaying ? "active" : ""}>START/STOP</button>
             <span>START/STOP</span>
         </article>
     );
