@@ -12,6 +12,7 @@ class Dmx extends Component {
         this.minuteToMil = 60000;
         this.timer       = "";
         this.monoAudio   = new Audio();
+        this.handleStartStop = this.handleStartStop.bind(this)
 
         this.state = {
             tempo: 120,
@@ -62,7 +63,7 @@ class Dmx extends Component {
                 <TempoUI tempo={this.state.tempo} onChange={(e) => this.handleTempo(e)}></TempoUI>
                 <PatternUI onClick={(e) => this.togglePattern(e)}></PatternUI>
                 <SwingUI onClick={(e) => this.handleSwing(e)} swing={this.state.swing}></SwingUI>
-                <StartStopUI onClick={this.handleStartStop.bind(this)} isPlaying={this.state.isPlaying}></StartStopUI>
+                <StartStopUI onClick={this.handleStartStop} isPlaying={this.state.isPlaying}></StartStopUI>
                 <BassDrum baseArray={this.baseArray} onClick={(e) => this.handleButtonClick(e)}></BassDrum>
                 <SnareDrum baseArray={this.baseArray} onClick={(e) => this.handleButtonClick(e)}></SnareDrum>
                 <Clap baseArray={this.baseArray} onClick={(e) => this.handleButtonClick(e)}></Clap>
