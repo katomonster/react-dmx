@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import './App.css';
+import './../App.css';
+
+import TempoUI from './TempoUI';
+import PatternUI from './PatternUI';
+import SwingUI from './SwingUI';
+import StartStopUI from './StartStopUI';
+import BassDrum from './BassDrum';
+import SnareDrum from './SnareDrum';
+import Clap from './Clap';
+import ClosedHat from './ClosedHat';
+import OpenHat from './OpenHat';
 
 class Dmx extends Component {
     constructor() {
@@ -302,88 +312,5 @@ class Dmx extends Component {
         }
     }
 }
-
-const TempoUI = (props) => {
-    return (
-        <article className="tempo">
-            <input onChange={(e) => props.onChange(e)} value = {props.tempo} />
-            <label>TEMPO</label>
-        </article>
-    );
-}
-
-const PatternUI = (props) => {
-    return (
-        <article className="toggle-pattern top-btn">
-            <button className="active" onClick={(e) => props.onClick(e)}>PATTERN</button>
-            <span>PATTERN</span>
-        </article>
-    );
-}
-
-const SwingUI = (props) => {
-    const swingClass = props.swing ? 'active' : '';
-    return (
-        <article className="swing top-btn">
-            <button onClick={(e) => props.onClick(e)} className={swingClass}>SWING</button>
-            <span>SWING</span>
-        </article>
-    );
-}
-
-const StartStopUI = (props) => {
-    return (
-        <article className="start-stop top-btn">
-            <button onClick={(e) => props.onClick(e)} className={props.isPlaying ? "active" : ""}>START/STOP</button>
-            <span>START/STOP</span>
-        </article>
-    );
-}
-
-const BassDrum = (props) => {
-    return (
-        <article className='row one'>
-            <span>BASS</span>
-            {props.baseArray.map((elem, i) => <button className="kick simple-button" key={i} onClick={(e) => props.onClick(e)}>Kick</button> )}
-        </article>
-    );
-}
-
-const SnareDrum = (props) => {
-    return (
-        <article className='row two'>
-            <span>SNARE</span>
-            {props.baseArray.map((elem, i) => <button className="snare simple-button" key={i}  onClick={(e) => props.onClick(e)}>Snare</button> )}
-        </article>
-    );
-}
-
-const Clap = (props) => {
-    return (
-        <article className='row three'>
-            <span>CLAP</span>
-            {props.baseArray.map((elem, i) => <button className="clap simple-button" key={i}  onClick={(e) => props.onClick(e)}>Clap</button> )}
-        </article>
-    );
-}
-
-const ClosedHat = (props) => {
-    return (
-        <article className='row four'>
-            <span>HI-HAT A</span>
-            {props.baseArray.map((elem, i) => <button className="clhat  simple-button" key={i}  onClick={(e) => props.onClick(e)}>Closed Hat</button> )}
-        </article>
-    );
-}
-
-const OpenHat = (props) => {
-    return (
-        <article className='row five'>
-            <span>HI-HAT B</span>
-            {props.baseArray.map((elem, i) => <button className="ophat simple-button" key={i} onClick={(e) => props.onClick(e)}>Opened Hat</button> )}
-        </article>
-    );
-}
-
 
 export default Dmx;
