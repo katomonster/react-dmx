@@ -117,3 +117,42 @@ input {
 }
 
 .hide { display: none; }
+
+#instructions {
+    width: 820px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#instructions #preface {
+    font-size: 14px;
+    font-style: italic;
+}
+
+#instructions h2 {
+    display: block;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    width: inherit;
+}
+
+#instructions p, ul {
+    display: block;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+#instructions li {
+    list-style: disc;
+    padding: 5px 0;
+}
+
+#instructions h3 {
+    display: block;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    width: inherit;
+}
